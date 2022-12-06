@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import { Task } from "./Task";
 
 function App() {
   const [todoList, setToDoList] = useState([]);
@@ -15,10 +16,11 @@ function App() {
     const task = {
       id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
       taskName: newInput,
-    }
+    };
     setToDoList([...todoList, task]);
   };
 
+  /* Deletes input based on id */
   const deleteInput = (id) => {
     setToDoList(todoList.filter((task) => task.id !== id));
   };
@@ -32,10 +34,11 @@ function App() {
       <div className="list">
         {todoList.map((task) => {
           return (
-            <div>
-              <h1>{task.taskName}</h1>
-              <button onClick={() => deleteInput(task.id)}>Delete</button>
-            </div>
+            <Task
+              taskName={task.taskName}
+              id={task.id}
+              deleteInput={deleteInput}
+            />
           );
         })}
       </div>
