@@ -45,12 +45,14 @@ function TodoList() {
   return (
     <>
       <div className="header text-center">
-        <h1>Todo List</h1>
+        <h1><b>Todo List</b></h1>
         <button className="btn btn-primary mt-4" onClick={() => setModal(true)}>
           Create Task
         </button>
+        <h2 className="task-header"><b>All Task</b></h2>
       </div>
       <div className="task-container">
+        
         {taskList.map((o, index) => (
           <Card
             taskObj={o}
