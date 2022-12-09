@@ -1,8 +1,7 @@
-/* This page contains creating task functionality */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-export default function CreateTask({ modal, toggle, saveTask }) {
+export default function EditTask({ modal, toggle, updateTask, taskObj}) {
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -16,15 +15,24 @@ export default function CreateTask({ modal, toggle, saveTask }) {
     }
   };
 
-  const handleSave = () => {
-    let taskObj = {};
-    taskObj["Name"] = taskName;
-    taskObj["Description"] = description;
-    saveTask(taskObj);
-  };
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    let temp = {}
+    temp['Name'] = taskName
+    temp['Description'] = description
+    updateTask(temp)
+    
+  }
+
+  /* Stores data in the popup */
+  useEffect(() => {
+    setTaskName(taskObj.Name)
+    setDescription(taskObj.Description)
+  },[])
+
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Create Task</ModalHeader>
+      <ModalHeader toggle={toggle}>Edit Task</ModalHeader>
       <ModalBody>
         <form>
           <div className="form-group">
@@ -51,8 +59,8 @@ export default function CreateTask({ modal, toggle, saveTask }) {
         </form>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={handleSave}>
-          Create
+        <Button color="primary" onClick={handleUpdate}>
+          Update
         </Button>{" "}
         <Button color="secondary" onClick={toggle}>
           Cancel
