@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import CreateTask from "../popup/CreateTask";
+import Card from "./Card";
 
 
 function TodoList() {
@@ -8,11 +9,23 @@ function TodoList() {
 
     const toggle = () => setModal(!modal);
 
+    useEffect(() => {
+        let arr = localStorage.getItem("TaskInfo")
+        
+        if(arr){
+            let obj = JSON.parse(arr) //convert arr string to object
+            setTaskList(obj)
+        }
+    },[])
+
+    /* Pushes the task user creates */
     const saveTask = (taskObj) => {
         let temp = [...taskList]
         temp.push(taskObj)
+        localStorage.setItem("TaskInfo", JSON.stringify(temp)) //Stores data in local storage
         setTaskList(temp)
         setModal(false)
+
     }
   return (
     <>
@@ -21,8 +34,8 @@ function TodoList() {
         <button className="btn btn-primary mt-4" onClick = {() => setModal(true)}>Create Task</button>
       </div>
       <div className="task-container">
-        {taskList.map((o) => <li>{o.Name}</li>)}
-        {taskList.map((o) => <li>{o.Description}</li>)}
+        {taskList.map((o, index) => <Card taskObj = {o} index = {index} /> )}
+       
       </div>
       <CreateTask toggle={toggle} modal={modal} saveTask={saveTask}/>
     </>
