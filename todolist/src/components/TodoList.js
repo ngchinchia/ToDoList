@@ -71,11 +71,11 @@ function TodoList() {
   return (
     <>
       <div className="header text-center">
-        <h1><b>Todo List</b></h1>
+        <h1 className="title"><b>T O D O</b></h1>
         <button className="btn btn-primary mt-4 btn-lg" onClick={() => setModal(true)}>
           Create Task
         </button>
-        <h2 className="task-header"><b>All Task</b></h2>
+        <h2 className="task-header"><b>T a s k</b></h2>
       </div>
       <div className="task-container">
         

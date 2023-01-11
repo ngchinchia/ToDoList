@@ -47,7 +47,8 @@ const Card = ({ taskObj, index, deleteTask, updateArr }) => {
         padding: "16px",
         textAlign: "center",
         margin: "50px",
-        marginTop:"100px"
+        marginTop:"100px",
+        
       }}
     >
       <h2 style={{ marginTop: "0", color: "#333" }}>{taskObj.Name}</h2>

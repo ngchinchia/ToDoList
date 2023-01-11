@@ -28,7 +28,7 @@ export default function EditTask({ modal, toggle, updateTask, taskObj}) {
   useEffect(() => {
     setTaskName(taskObj.Name)
     setDescription(taskObj.Description)
-  },[])
+  },[taskObj])
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
